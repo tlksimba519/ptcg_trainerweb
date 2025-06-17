@@ -43,7 +43,7 @@ const defaultImage = 'https://images.unsplash.com/photo-1526406915890-5cbac1b219
 
 onMounted(async () => {
   try {
-    const res = await axios.get('http://localhost:8080/cards')
+    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/cards`)
     cards.value = res.data.data || res.data || []
   } catch (err) {
     console.error('❌ 載入卡片資料失敗', err)

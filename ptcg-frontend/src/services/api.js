@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/',
+  baseURL: 'https://ptcgtrainerweb-production.up.railway.app/',
 })
 
 // 統一掛上 token

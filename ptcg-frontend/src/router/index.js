@@ -4,10 +4,12 @@ import LoginView from '../views/LoginView.vue'
 import MyDecks from '../views/MyDecks.vue'
 import NewDeck from '../views/NewDeck.vue'
 import CardOverview from '../views/CardOverview.vue'
+import RegisterView from '../views/RegisterView.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
   { path: '/login', name: 'Login', component: LoginView },
+  { path: '/register', name: 'Register', component: RegisterView },
   {
     path: '/my-decks',
     name: 'MyDecks',

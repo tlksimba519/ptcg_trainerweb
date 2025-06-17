@@ -44,7 +44,7 @@ const removeCard = (index) => {
 const submitDeck = async () => {
   try {
     const token = localStorage.getItem('token')
-    await axios.post('http://localhost:8080/decks', {
+    await axios.post(`${import.meta.env.VITE_API_BASE_URL}/decks`, {
       title: title.value,
       description: description.value,
       cards: cards.value,
@@ -61,7 +61,7 @@ const submitDeck = async () => {
 // 🧠 初始化時載入所有卡片清單
 onMounted(async () => {
   try {
-    const res = await axios.get('http://localhost:8080/cards')
+    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/cards`)
     allCards.value = res.data.data
   } catch (err) {
     console.error('❌ 無法取得卡片資料', err)

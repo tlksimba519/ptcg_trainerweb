@@ -8,14 +8,24 @@
     </div>
 
     <div v-if="loading">載入中...</div>
-    <div v-else-if="decks.length === 0">尚未建立任何牌組。</div>
-    <ul v-else>
-      <li v-for="deck in decks" :key="deck.id" class="mb-2 border p-2 rounded shadow-sm">
-        <strong>{{ deck.title }}</strong> - {{ deck.cards?.length || 0 }} 張卡
 
-        <div class="desc">{{ deck.description }}</div>
-      </li>
-    </ul>
+<div v-else-if="decks.length === 0">
+  尚未建立任何牌組。
+</div>
+
+<ul v-else>
+  <li
+    v-for="deck in decks"
+    :key="deck.id"
+    class="mb-2 border p-2 rounded shadow-sm"
+  >
+    <strong>{{ deck.title }}</strong>
+    - {{ Array.isArray(deck.cards) ? deck.cards.length : 0 }} 張卡
+
+    <div class="desc">{{ deck.description }}</div>
+  </li>
+</ul>
+
   </div>
 </template>
 
@@ -33,17 +43,23 @@ onMounted(async () => {
     loading.value = false
     return
   }
+
   try {
-    const res = await axios.get('http://localhost:8080/decks', {
+    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/decks`, {
       headers: { Authorization: token },
     })
-    decks.value = res.data.data
+
+    const raw = res.data?.data
+    decks.value = Array.isArray(raw) ? raw : []
+
   } catch (err) {
     console.error('❌ 無法取得牌組資料', err)
+    decks.value = []
   } finally {
     loading.value = false
   }
 })
+
 </script>
 
 <style scoped>

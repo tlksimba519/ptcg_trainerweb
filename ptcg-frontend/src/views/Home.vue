@@ -34,7 +34,7 @@ const loading = ref(true)
 
 onMounted(async () => {
   try {
-    const res = await axios.get('http://localhost:8080/tournament')
+    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tournament`)
     tournaments.value = res.data.data || []
   } catch (err) {
     console.error('❌ 載入賽事資訊失敗', err)

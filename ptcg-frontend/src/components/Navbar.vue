@@ -2,10 +2,16 @@
   <nav class="navbar">
     <router-link to="/" class="nav-link">首頁</router-link>
     <router-link to="/my-decks" class="nav-link">我的牌組</router-link>
+    <router-link to="/cards" class="nav-link">卡牌一覽</router-link>
     <span class="spacer"></span>
+    
     <span v-if="token">嗨，{{ name }}！</span>
     <button v-if="token" @click="logout">登出</button>
-    <router-link v-else to="/login" class="nav-link">登入</router-link>
+    
+    <template v-else>
+      <router-link to="/login" class="nav-link">登入</router-link>
+      <router-link to="/register" class="nav-link">註冊</router-link>
+    </template>
   </nav>
 </template>
 
